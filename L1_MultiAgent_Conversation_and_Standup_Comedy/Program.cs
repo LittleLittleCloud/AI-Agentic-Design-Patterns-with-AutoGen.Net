@@ -5,12 +5,11 @@ using Azure.AI.OpenAI;
 
 var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
 var openAIModel = "gpt-3.5-turbo";
+var openaiClient = new OpenAIClient(openAIKey);
 
 // Define an OpenAI Chat Agent
 // You can also connect to other LLM platforms like Mistral, Gemini, Ollama by using a specific agent
 // For example, using MistralChatAgent to connect to Mistral
-
-var openaiClient = new OpenAIClient(openAIKey);
 var agent = new OpenAIChatAgent(
     openAIClient: openaiClient,
     name: "chatbot",
