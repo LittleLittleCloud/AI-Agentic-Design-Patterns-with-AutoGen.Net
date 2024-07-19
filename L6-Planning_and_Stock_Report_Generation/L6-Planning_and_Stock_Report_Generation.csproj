@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>L6_Planning_and_Stock_Report_Generation</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="img\nvidia-plot.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="img\nvidia-plot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoGen" Version="0.0.16" />
+		<PackageReference Include="AutoGen.SemanticKernel" Version="0.0.16" />
+		<PackageReference Include="AutoGen.SourceGenerator" Version="0.0.16" />
+	</ItemGroup>
+
+</Project>
