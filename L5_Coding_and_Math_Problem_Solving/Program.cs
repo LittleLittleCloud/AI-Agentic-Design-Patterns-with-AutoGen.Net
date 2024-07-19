@@ -15,6 +15,7 @@ var openaiClient = new OpenAIClient(openAIKey);
 // GPT is much better at writing python code than dotnet code given the rich python training data.
 // And the code execution feature in dotnet AutoGen is very limited if we asks agent to resolve tasks using C#.
 // Therefore, this example is more of a demonstration of how to use dotnet interactive as code executor.
+// It is not the apple-to-apple comparison with the corresponding python example.
 
 // setup dotnet interactive
 var workDir = Path.Combine(Path.GetTempPath(), "InteractiveService");
