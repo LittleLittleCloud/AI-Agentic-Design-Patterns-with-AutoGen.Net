@@ -33,7 +33,7 @@ var toolMiddleware = new FunctionCallMiddleware(
     });
 
 // Create agents
-// You will create the player agents and a board proxy agents for the tic-tac-toe game.
+// You will create the player agents for the tic-tac-toe game.
 var nestMiddleware = new NestMiddleware();
 var playerX = new OpenAIChatAgent(
     openAIClient: openaiClient,
