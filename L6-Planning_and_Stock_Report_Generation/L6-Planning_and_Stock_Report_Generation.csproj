@@ -21,7 +21,6 @@
 	<ItemGroup>
 		<PackageReference Include="AutoGen" Version="0.0.16" />
 		<PackageReference Include="AutoGen.SemanticKernel" Version="0.0.16" />
-		<PackageReference Include="AutoGen.SourceGenerator" Version="0.0.16" />
 	</ItemGroup>
 
 </Project>
