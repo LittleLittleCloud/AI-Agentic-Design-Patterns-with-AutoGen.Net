@@ -21,3 +21,8 @@
 - [x] [Lesson 5: Coding_and_Math_Problem_Solving](./notebook/L5-Coding_and_Math_Problem_Solving.ipynb)
 - [x] [Lesson 6: Planning_and_Stock_Report_Generation](./notebook/L6-Planning_and_Stock_Report_Generation.ipynb.ipynb)
 
+## Difference between Console Apps and Notebooks examples
+- Notebook also contains the output result while Console app doesn't.
+- The way to define a tool call is different between Console app and notebook examples. Console app uses `AutoGen.SourceGenerator` to create function definition directly from the structural comment while Notebook examples create function definition using semantic-kernel plugin style. This is because source generator is not available in Notebook use case.
+- The code executor is different: In Console app examples, it needs to start a dotnet interactive instance to run C# code, which is not necessary in Notebook and we can simply execute the code using the running kernel.
+
