@@ -4,7 +4,7 @@ using AutoGen.OpenAI.Extension;
 using Azure.AI.OpenAI;
 
 var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
-var openAIModel = "gpt-3.5-turbo";
+var openAIModel = "gpt-4o-mini";
 
 var openaiClient = new OpenAIClient(openAIKey);
 
