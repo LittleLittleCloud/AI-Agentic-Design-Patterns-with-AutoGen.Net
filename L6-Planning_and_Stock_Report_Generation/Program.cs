@@ -3,6 +3,7 @@ using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
 using Azure.AI.OpenAI;
 using System.Text;
+using static Google.Cloud.AIPlatform.V1.PublisherModel.Types.CallToAction.Types;
 
 // Note
 // This example is slightly different with the python ones when it comes to engineer agent
@@ -154,13 +155,9 @@ var chatHistory = new List<IMessage>()
     new TextMessage(Role.User, task, from: user.Name),
 };
 
-var maxTurn = 20;
-while (maxTurn > 0)
+await foreach (var reply in groupChat.SendAsync(chatHistory, maxRound: 20))
 {
-    var replies = await groupChat.CallAsync(chatHistory, maxRound: 1);
-    var reply = replies.Last();
     chatHistory.Add(reply);
-    maxTurn--;
 
     if (reply.GetContent()?.ToLower().Contains("task completed") is true)
     {
