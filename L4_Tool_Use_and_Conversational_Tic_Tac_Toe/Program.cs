@@ -66,21 +66,14 @@ var playerO = new OpenAIChatAgent(
     .RegisterMiddleware(nestMiddleware);
 
 // Start the game
-var maxRounds = 9; // Maximum number of rounds in a tic-tac-toe game
 var conversationHistory = new List<IMessage>()
 {
     new TextMessage(Role.Assistant, "You start first", from: playerX.Name),
 };
 
-while (maxRounds > 0)
+await foreach(var msg in playerX.SendAsync(receiver: playerO, chatHistory: conversationHistory, maxRound: 9))
 {
-    var replyX = await playerX.SendAsync(
-        receiver: playerO,
-        chatHistory: conversationHistory,
-        maxRound: 1);
-
-    conversationHistory.Add(replyX.Last());
-    maxRounds--;
+    conversationHistory.Add(msg);
 
     // break if anyone wins
     if (board.CheckWin(1))
@@ -101,8 +94,8 @@ while (maxRounds > 0)
     Console.WriteLine(displayBoard);
 }
 
-// Check if it's a draw
-if (maxRounds == 0)
+// check if it's a draw
+if (!board.CheckWin(1) && !board.CheckWin(2))
 {
     Console.WriteLine("It's a draw!");
 }

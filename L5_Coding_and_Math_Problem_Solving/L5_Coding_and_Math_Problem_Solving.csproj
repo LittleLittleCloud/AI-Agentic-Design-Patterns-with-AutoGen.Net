@@ -9,8 +9,8 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="AutoGen" Version="0.0.17" />
-		<PackageReference Include="AutoGen.DotnetInteractive" Version="0.0.17" />
+		<PackageReference Include="AutoGen" Version="$(AutoGenVersion)" />
+		<PackageReference Include="AutoGen.DotnetInteractive" Version="$(AutoGenVersion)" />
 	</ItemGroup>
 
 </Project>
