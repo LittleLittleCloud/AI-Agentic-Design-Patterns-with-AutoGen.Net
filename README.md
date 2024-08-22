@@ -18,8 +18,8 @@
 - [x] [Lesson 2: Sequential Chats and Customer Onboarding](./notebook/L2_Sequential_Chats_and_Customer_Onboarding.ipynb)
 - [x] [Lesson 3: Reflection_and_Blogpost_Writing](./notebook/L3_Reflection_and_Blogpost_Writing.ipynb)
 - [x] [Lesson 4: Tool_Use_and_Conversational_Tic_Tac_Toe](./notebook/L4_Tool_Use_and_Conversational_Tic_Tac_Toe.ipynb)
-- [x] [Lesson 5: Coding_and_Math_Problem_Solving](./notebook/L5-Coding_and_Math_Problem_Solving.ipynb)
-- [x] [Lesson 6: Planning_and_Stock_Report_Generation](./notebook/L6-Planning_and_Stock_Report_Generation.ipynb.ipynb)
+- [x] [Lesson 5: Coding_and_Math_Problem_Solving](./notebook/L5_Coding_and_Math_Problem_Solving.ipynb)
+- [x] [Lesson 6: Planning_and_Stock_Report_Generation](./notebook/L6_Planning_and_Stock_Report_Generation.ipynb)
 
 ## Difference between Console Apps and Notebooks examples
 - Notebook also contains the output result while Console app doesn't.
