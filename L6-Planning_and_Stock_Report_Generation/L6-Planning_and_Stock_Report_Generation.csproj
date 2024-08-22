@@ -19,9 +19,10 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AutoGen" Version="0.0.17" />
-		<PackageReference Include="AutoGen.SemanticKernel" Version="0.0.17" />
-		<PackageReference Include="AutoGen.SourceGenerator" Version="0.0.17" />
+		<PackageReference Include="AutoGen" Version="$(AutoGenVersion)" />
+		<PackageReference Include="AutoGen.DotnetInteractive" Version="$(AutoGenVersion)" />
+		<PackageReference Include="AutoGen.SemanticKernel" Version="$(AutoGenVersion)" />
+		<PackageReference Include="AutoGen.SourceGenerator" Version="$(AutoGenVersion)" />
 	</ItemGroup>
 
 </Project>

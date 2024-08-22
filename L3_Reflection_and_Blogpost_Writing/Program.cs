@@ -45,7 +45,8 @@ var critic = new OpenAIChatAgent(
 var conversation = await critic.SendAsync(
     receiver: writer,
     message: task,
-    maxRound: 3);
+    maxRound: 3)
+    .ToListAsync();
 
 // Use the last message in the conversation as the final result
 var res = conversation.Last();
@@ -116,7 +117,8 @@ var nestChatCritic = critic
 conversation = await nestChatCritic.SendAsync(
     message: task,
     receiver: writer,
-    maxRound: 3);
+    maxRound: 3)
+    .ToListAsync();
 
 var finalResult = conversation.Last();
 
@@ -157,16 +159,19 @@ class NestChatMiddleware : IMiddleware
         var seoReview = await critic.SendAsync(
             receiver: seo,
             message: reviewPrompt,
-            maxRound: 1);
+            maxRound: 1)
+            .ToListAsync();
         var legalReview = await critic.SendAsync(
             receiver: legal,
             message: reviewPrompt,
-            maxRound: 1);
+            maxRound: 1)
+            .ToListAsync();
 
         var ethicsReview = await critic.SendAsync(
             receiver: ethics,
             message: reviewPrompt,
-            maxRound: 1);
+            maxRound: 1)
+            .ToListAsync();
 
         var reviews = seoReview.Concat(legalReview).Concat(ethicsReview);
 
@@ -174,7 +179,8 @@ class NestChatMiddleware : IMiddleware
             receiver: meta,
             message: "Aggregrate feedback from all reviewers and give final suggestions on the writing.",
             chatHistory: reviews,
-            maxRound: 1);
+            maxRound: 1)
+            .ToListAsync();
 
         var lastReview = metaReview.Last();
         lastReview.From = critic.Name;

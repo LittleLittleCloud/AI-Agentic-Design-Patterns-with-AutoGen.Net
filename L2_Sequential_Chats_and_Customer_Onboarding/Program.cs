@@ -89,7 +89,8 @@ var greetingMessage = new TextMessage(Role.Assistant, """
 var conversation = await onboardingPersonalInformationAgent.SendAsync(
     receiver: user,
     [greetingMessage],
-    maxRound: 2);
+    maxRound: 2)
+    .ToListAsync();
 
 var summarizePrompt = """
     Return the customer information into as JSON object only: {'name': '', 'location': ''}
@@ -106,7 +107,8 @@ var topicPreferenceMessage = new TextMessage(Role.Assistant, """
 conversation = await onboardingTopicPreferenceAgent.SendAsync(
     receiver: user,
     [topicPreferenceMessage],
-    maxRound: 1);
+    maxRound: 1)
+    .ToListAsync();
 
 // Keep summarizing
 summary = await summarizer.SendAsync(chatHistory: new[] { summary }.Concat(conversation));
@@ -120,7 +122,8 @@ var funFactMessage = new TextMessage(Role.User, """
 conversation = await user.SendAsync(
     receiver: customerEngagementAgent,
     chatHistory: conversation.Concat([funFactMessage]), // this time, we keep the previous conversation history
-    maxRound: 1);
+    maxRound: 1)
+    .ToListAsync();
 
 // Keep summarizing
 summary = await summarizer.SendAsync(chatHistory: new[] { summary }.Concat(conversation));

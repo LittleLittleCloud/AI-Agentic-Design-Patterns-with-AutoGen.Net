@@ -1,5 +1,6 @@
 ﻿using AutoGen.Core;
 using AutoGen.DotnetInteractive;
+using AutoGen.DotnetInteractive.Extension;
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
 using Azure.AI.OpenAI;
@@ -18,21 +19,28 @@ var openaiClient = new OpenAIClient(openAIKey);
 // It is not the apple-to-apple comparison with the corresponding python example.
 
 // setup dotnet interactive
-var workDir = Path.Combine(Path.GetTempPath(), "InteractiveService");
-if (!Directory.Exists(workDir))
-{
-    Directory.CreateDirectory(workDir);
-}
-
-using var service = new InteractiveService(workDir);
-var dotnetInteractiveFunctions = new DotnetInteractiveFunction(service);
-await service.StartAsync(workDir);
+using var kernel = DotnetInteractiveKernelBuilder
+    .CreateEmptyInProcessKernelBuilder()
+    .AddCSharpKernel()
+    .Build();
 
 // Agent with code executor configuration
 var codeExecutorAgent = new DefaultReplyAgent(
     name: "code_executor_agent",
     defaultReply: "no code to execute")
-    .RegisterDotnetCodeBlockExectionHook(interactiveService: service)
+    .RegisterMiddleware(async (msgs, option, next, ct) =>
+    {
+        // check if the last message contain csharp code blcok
+        var lastMsg = msgs.LastOrDefault();
+        if (lastMsg?.ExtractCodeBlock("```csharp", "```") is string csharpCode)
+        {
+            var result = await kernel.RunSubmitCodeCommandAsync(csharpCode, "csharp");
+
+            return new TextMessage(Role.Assistant, result ?? string.Empty, from: next.Name);
+        }
+
+        return await next.GenerateReplyAsync(msgs, option, ct);
+    })
     .RegisterPrintMessage();
 
 // Agent with dotnet coding writing capability
@@ -73,28 +81,22 @@ var chatHistory = new List<IMessage>()
 {
     new TextMessage(Role.Assistant, task, from: codeExecutorAgent.Name),
 };
-var maxRoundLeft = 10;
 
-while (maxRoundLeft > 0)
+await foreach(var reply in coderAgent.SendAsync(receiver: codeExecutorAgent, chatHistory: chatHistory, maxRound: 10))
 {
-    var reply = await coderAgent.SendAsync(
-        receiver: codeExecutorAgent,
-        chatHistory: chatHistory,
-        maxRound: 1);
 
-    if (reply.Last().GetContent()?.ToLower().Contains("task completed") == true)
+    if (reply.GetContent()?.ToLower().Contains("task completed") == true)
     {
         break;
     }
     else
     {
-        chatHistory.Add(reply.Last());
+        chatHistory.Add(reply);
     }
-    maxRoundLeft--;
 }
 
-// Read the result from {workDir}/result.txt
-var resultPath = Path.Combine(workDir, "result.txt");
+// Read the result from result.txt
+var resultPath = Path.Combine("result.txt");
 var result = File.ReadAllText(resultPath);
 Console.WriteLine(result);
 

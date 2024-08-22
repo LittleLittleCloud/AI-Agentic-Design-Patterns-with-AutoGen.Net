@@ -2,6 +2,7 @@
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
 using Azure.AI.OpenAI;
+using static Google.Cloud.AIPlatform.V1.PublisherModel.Types.CallToAction.Types;
 
 var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
 var openAIModel = "gpt-4o-mini";
@@ -51,7 +52,8 @@ var joe = new OpenAIChatAgent(
 var chatResult = await joe.SendAsync(
     receiver: cathy,
     message: "I'm Joe. Let's keep the jokes rolling.",
-    maxRound: 4);
+    maxRound: 4)
+    .ToListAsync();
 
 // Print token consumption
 Console.WriteLine($"Total Token count: {tokenCountMiddleware.GetTokenCount()}");
@@ -98,23 +100,14 @@ var chatHistory = new List<IMessage>
 {
     new TextMessage(Role.User, "I'm Joe. Let's keep the jokes rolling.", from: joe.Name)
 };
-var roundLeft = 10;
-while(roundLeft > 0)
-{
-    var replies = await joe.SendAsync(
-        receiver: cathy,
-        chatHistory,
-        maxRound: 1);
 
-    var reply = replies.Last();
-    if (reply.GetContent()?.ToLower().Contains("i gotta go") is true)
+await foreach(var msg in joe.SendAsync(receiver: cathy, chatHistory, maxRound: 10))
+{
+    if (msg.GetContent()?.ToLower().Contains("i gotta go") is true)
     {
         break;
     }
-    chatHistory.Add(reply);
-    roundLeft--;
 }
-
 
 class CountTokenMiddleware : IMiddleware
 {

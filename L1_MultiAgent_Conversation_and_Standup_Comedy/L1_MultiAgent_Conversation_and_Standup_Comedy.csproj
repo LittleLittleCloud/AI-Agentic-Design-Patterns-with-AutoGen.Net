@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoGen" Version="0.0.17" />
+    <PackageReference Include="AutoGen" Version="$(AutoGenVersion)" />
   </ItemGroup>
 
 </Project>
