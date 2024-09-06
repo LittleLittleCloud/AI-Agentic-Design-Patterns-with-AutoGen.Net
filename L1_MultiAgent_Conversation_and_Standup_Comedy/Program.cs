@@ -1,11 +1,9 @@
 ﻿using AutoGen.Core;
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
-using Azure.AI.OpenAI;
 using OpenAI;
 using OpenAI.Chat;
 using System.Runtime.CompilerServices;
-using static Google.Cloud.AIPlatform.V1.PublisherModel.Types.CallToAction.Types;
 
 var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
 var openAIModel = "gpt-4o-mini";
@@ -98,7 +96,7 @@ var chatHistory = new List<IMessage>
     new TextMessage(Role.User, "I'm Joe. Let's keep the jokes rolling.", from: joe.Name)
 };
 
-await foreach(var msg in joe.SendAsync(receiver: cathy, chatHistory, maxRound: 10))
+await foreach (var msg in joe.SendAsync(receiver: cathy, chatHistory, maxRound: 10))
 {
     if (msg.GetContent()?.ToLower().Contains("i gotta go") is true)
     {
