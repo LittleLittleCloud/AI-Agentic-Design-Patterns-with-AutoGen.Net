@@ -1,12 +1,13 @@
 ﻿using AutoGen.Core;
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
-using Azure.AI.OpenAI;
+using OpenAI;
 
 var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
 var openAIModel = "gpt-4o-mini";
 
 var openaiClient = new OpenAIClient(openAIKey);
+var chatClient = openaiClient.GetChatClient(openAIModel);
 
 // The Task!
 var task = """
@@ -17,9 +18,8 @@ var task = """
 
 // Create a writer agent
 var writer = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Writer",
-    modelName: openAIModel,
     systemMessage: """
     You are a writer. You write engaging and concise blogpost (with title) on given topics.
     You must polish your writing based on the feedback you receive and give a refined version.
@@ -33,9 +33,8 @@ var reply = await writer.SendAsync(task);
 
 // Adding reflection by creating a critic agent to reflect on the work of the writer agent.
 var critic = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Critic",
-    modelName: openAIModel,
     systemMessage: """
     You are a critic. You review the work of the writer and provide constructive feedback to help improve the quality of the content."
     """)
@@ -57,9 +56,8 @@ var res = conversation.Last();
 // But you can achieve the same using the middleware pattern.
 
 var SEOReviewer = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "SEO_Reviewer",
-    modelName: openAIModel,
     systemMessage: """
     You are an SEO reviewer, known for your ability to optimize content for search engines, ensuring that it ranks well and attracts organic traffic.
     Make sure your suggestion is concise (within 3 bullet points), concrete and to the point.
@@ -69,9 +67,8 @@ var SEOReviewer = new OpenAIChatAgent(
     .RegisterPrintMessage();
 
 var LegalReviewer = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Legal_Reviewer",
-    modelName: openAIModel,
     systemMessage: """
     You are a legal reviewer, known for your ability to ensure that content is legally compliant and free from any potential legal issues.
     Make sure your suggestion is concise (within 3 bullet points), concrete and to the point.
@@ -81,9 +78,8 @@ var LegalReviewer = new OpenAIChatAgent(
     .RegisterPrintMessage();
 
 var EthicsReviewer = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Ethics_Reviewer",
-    modelName: openAIModel,
     systemMessage: """
     You are an ethics reviewer, known for your ability to ensure that content is ethically sound and free from any potential ethical issues.
     Make sure your suggestion is concise (within 3 bullet points), concrete and to the point.
@@ -93,9 +89,8 @@ var EthicsReviewer = new OpenAIChatAgent(
     .RegisterPrintMessage();
 
 var MetaReviewer = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Meta_Reviewer",
-    modelName: openAIModel,
     systemMessage: """
     You are a meta reviewer, you aggragate and review the work of other reviewers and give a final suggestion on the content."
     """)
