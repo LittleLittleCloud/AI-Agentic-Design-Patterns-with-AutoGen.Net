@@ -3,12 +3,13 @@ using AutoGen.DotnetInteractive;
 using AutoGen.DotnetInteractive.Extension;
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
-using Azure.AI.OpenAI;
+using OpenAI;
 
 var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
 var openAIModel = "gpt-4o-mini";
 
 var openaiClient = new OpenAIClient(openAIKey);
+var chatClient = openaiClient.GetChatClient(openAIModel);
 
 // Define a code executor to run dotnet code
 // Here we use the dotnet interactive as the code executor
@@ -45,9 +46,8 @@ var codeExecutorAgent = new DefaultReplyAgent(
 
 // Agent with dotnet coding writing capability
 var coderAgent = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "code_writer_agent",
-    modelName: openAIModel,
     systemMessage: """
     You act as dotnet coder, you write dotnet code to resolve task. Once you finish writing code, ask runner to run the code for you.
 

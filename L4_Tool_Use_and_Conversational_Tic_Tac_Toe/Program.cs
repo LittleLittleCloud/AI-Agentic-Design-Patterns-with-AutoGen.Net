@@ -1,8 +1,8 @@
 ﻿using AutoGen.Core;
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
-using Azure.AI.OpenAI;
 using Microsoft.SemanticKernel;
+using OpenAI;
 using System.ComponentModel;
 using System.Text;
 
@@ -10,6 +10,7 @@ var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw ne
 var openAIModel = "gpt-4o-mini";
 
 var openaiClient = new OpenAIClient(openAIKey);
+var chatClient = openaiClient.GetChatClient(openAIModel);
 
 // Initialize the chess board [3, 3]
 // 0: empty, 1: X, 2: O
@@ -19,7 +20,7 @@ var openaiClient = new OpenAIClient(openAIKey);
 
 var board = new TicTacToe(new int[3, 3]);
 var toolMiddleware = new FunctionCallMiddleware(
-    functions: 
+    functions:
     [
         board.DisplayBoardFunctionContract,
         board.MakeMoveFunctionContract,
@@ -36,9 +37,8 @@ var toolMiddleware = new FunctionCallMiddleware(
 // You will create the player agents for the tic-tac-toe game.
 var nestMiddleware = new NestMiddleware();
 var playerX = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Player_X",
-    modelName: openAIModel,
     systemMessage: """
     You are Player X. You are playing Tic-Tac-Toe against Player O.
     You can make a move by providing the row and column number.
@@ -51,9 +51,8 @@ var playerX = new OpenAIChatAgent(
     .RegisterMiddleware(nestMiddleware);
 
 var playerO = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Player_O",
-    modelName: openAIModel,
     systemMessage: """
     You are Player O. You are playing Tic-Tac-Toe against Player X.
     You can make a move by providing the row and column number.
@@ -71,7 +70,7 @@ var conversationHistory = new List<IMessage>()
     new TextMessage(Role.Assistant, "You start first", from: playerX.Name),
 };
 
-await foreach(var msg in playerX.SendAsync(receiver: playerO, chatHistory: conversationHistory, maxRound: 9))
+await foreach (var msg in playerX.SendAsync(receiver: playerO, chatHistory: conversationHistory, maxRound: 9))
 {
     conversationHistory.Add(msg);
 
