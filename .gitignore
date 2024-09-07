@@ -4,3 +4,5 @@
 # c#
 bin/
 obj/
+.DS_Store
+.idea/.idea.AI-Agentic-Design-Patterns-with-AutoGen.Net/.idea
