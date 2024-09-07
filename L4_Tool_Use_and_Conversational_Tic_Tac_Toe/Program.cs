@@ -1,15 +1,13 @@
 ﻿using AutoGen.Core;
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
-using Azure.AI.OpenAI;
 using Microsoft.SemanticKernel;
 using System.ComponentModel;
 using System.Text;
+using Util;
 
-var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
 var openAIModel = "gpt-4o-mini";
-
-var openaiClient = new OpenAIClient(openAIKey);
+var openaiClient = OpenAIClientProvider.Create();
 
 // Initialize the chess board [3, 3]
 // 0: empty, 1: X, 2: O

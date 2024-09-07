@@ -12,4 +12,8 @@
 		<PackageReference Include="AutoGen.SourceGenerator" Version="$(AutoGenVersion)" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Util\Util.csproj" />
+	</ItemGroup>
+
 </Project>

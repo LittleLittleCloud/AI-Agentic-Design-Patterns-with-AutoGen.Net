@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L6-Planning_and_Stock_Repor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L4_Tool_Use_and_Conversational_Tic_Tac_Toe", "L4_Tool_Use_and_Conversational_Tic_Tac_Toe\L4_Tool_Use_and_Conversational_Tic_Tac_Toe.csproj", "{327EE0BD-8663-40A0-AEF7-9CF46C7093C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{327EE0BD-8663-40A0-AEF7-9CF46C7093C0}.Release|x64.Build.0 = Release|Any CPU
 		{327EE0BD-8663-40A0-AEF7-9CF46C7093C0}.Release|x86.ActiveCfg = Release|Any CPU
 		{327EE0BD-8663-40A0-AEF7-9CF46C7093C0}.Release|x86.Build.0 = Release|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Debug|x64.Build.0 = Debug|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Debug|x86.Build.0 = Debug|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Release|x64.ActiveCfg = Release|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Release|x64.Build.0 = Release|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Release|x86.ActiveCfg = Release|Any CPU
+		{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

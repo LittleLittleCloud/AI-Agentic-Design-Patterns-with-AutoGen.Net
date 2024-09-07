@@ -2,11 +2,10 @@
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
 using Azure.AI.OpenAI;
-using static Google.Cloud.AIPlatform.V1.PublisherModel.Types.CallToAction.Types;
+using Util;
 
-var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
 var openAIModel = "gpt-4o-mini";
-var openaiClient = new OpenAIClient(openAIKey);
+var openaiClient = OpenAIClientProvider.Create();
 
 // Define an OpenAI Chat Agent
 // You can also connect to other LLM platforms like Mistral, Gemini, Ollama by using a specific agent
