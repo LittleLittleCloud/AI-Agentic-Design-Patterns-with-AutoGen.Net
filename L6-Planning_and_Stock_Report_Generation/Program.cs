@@ -9,8 +9,7 @@ using Util;
 // due to the lacking built-in support of running python code in C# AutoGen.
 // The engineer and executor agent is replaced with market watcher and data analyst agents to gather and plot the stock price data.
 
-var openAIModel = "gpt-4o-mini";
-var openaiClient = OpenAIClientProvider.Create();
+var chatClient = ChatClientProvider.Create("gpt-4o-mini");
 
 // The Task!
 var task = """
@@ -28,9 +27,8 @@ Today's date is 2024-04-23.
 // - Writer: to write the report.
 
 var user = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "user",
-    modelName: openAIModel,
     systemMessage: """
     Give the task, and send instructions to writer to refine the blog post.
     """)
@@ -38,9 +36,8 @@ var user = new OpenAIChatAgent(
     .RegisterPrintMessage();
 
 var planner = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Planner",
-    modelName: openAIModel,
     systemMessage: """
     You are Planner.
     Given a task, please determine what step is needed to complete the task.
@@ -66,9 +63,8 @@ var marketWatcherFunctionCallMiddleware = new FunctionCallMiddleware(
     });
 
 var marketWatcher = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Market_Watcher",
-    modelName: openAIModel,
     systemMessage: """
     You are Market Watcher. You can gather stock price data.
     """)
@@ -84,9 +80,8 @@ var dataAnalystFunctionCallMiddleware = new FunctionCallMiddleware(
     });
 
 var dataAnalyst = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Data_Analyst",
-    modelName: openAIModel,
     systemMessage: """
     You are Data Analyst. You can plot stock price data.
     """)
@@ -95,9 +90,8 @@ var dataAnalyst = new OpenAIChatAgent(
     .RegisterPrintMessage();
 
 var writer = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Writer",
-    modelName: openAIModel,
     systemMessage: """
     Please write blogs in markdown format (with relevant titles) and put the content in pseudo ```md``` code block.
     You take feedback from the admin and refine your blog.
@@ -111,9 +105,8 @@ var writer = new OpenAIChatAgent(
 // The admin will be responsible for selecting the next speaker
 // It will not directly participate in the conversation
 var groupChatAdminAgent = new OpenAIChatAgent(
-    openAIClient: openaiClient,
-    name: "Admin",
-    modelName: openAIModel)
+    chatClient: chatClient,
+    name: "Admin")
     .RegisterMessageConnector();
 
 // Add a speaker selection policy using workflow

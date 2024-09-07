@@ -3,7 +3,7 @@ using Azure.AI.OpenAI;
 
 public static class OpenAIClientProvider
 {
-    public static OpenAIClient Create()
+    public static ChatClient Create(string openAIModel)
     {
         // if the OPENAI_API_KEY is set
         // we will use an OpenAI client pointing directly to OpenAI
@@ -11,7 +11,8 @@ public static class OpenAIClientProvider
         if (!string.IsNullOrWhiteSpace(openAIKey))
         {
             var openaiClient = new OpenAIClient(openAIKey);
-            return openaiClient;
+            var chatClient = openaiClient.GetChatClient(openAIModel);
+            return chatClient;
         }
         
         // if no OPENAI_API_KEY was set,
@@ -22,8 +23,9 @@ public static class OpenAIClientProvider
 
         if (!string.IsNullOrWhiteSpace(azureOaiEndpoint) && !string.IsNullOrWhiteSpace(azureOaiKey))
         {
-            var openaiClient = new OpenAIClient(new Uri(azureOaiEndpoint), new AzureKeyCredential(azureOaiKey));
-            return openaiClient;
+            var azureClient = new AzureOpenAIClient(new Uri(azureOaiEndpoint), new AzureKeyCredential(azureOaiKey));
+            var chatClient = azureClient.GetChatClient(openAIModel);
+            return chatClient;
         }
 
         throw new Exception(

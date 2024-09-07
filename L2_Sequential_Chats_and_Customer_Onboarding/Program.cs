@@ -3,15 +3,12 @@ using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
 using Util;
 
-var openAIModel = "gpt-4o-mini";
-var openaiClient = OpenAIClientProvider.Create();
+var chatClient = ChatClientProvider.Create("gpt-4o-mini");
 
 // Create the needed agents
-
 var onboardingPersonalInformationAgent = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Onboarding_Personal_Information_Agent",
-    modelName: openAIModel,
     systemMessage: """
     You are a helpful customer onboarding agent,
     you are here to help new customers get started with our product.
@@ -23,9 +20,8 @@ var onboardingPersonalInformationAgent = new OpenAIChatAgent(
     .RegisterPrintMessage();
 
 var onboardingTopicPreferenceAgent = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Onboarding_Topic_Preference_Agent",
-    modelName: openAIModel,
     systemMessage: """
     You are a helpful customer onboarding agent,
     you are here to help new customers get started with our product.
@@ -37,9 +33,8 @@ var onboardingTopicPreferenceAgent = new OpenAIChatAgent(
     .RegisterPrintMessage();
 
 var customerEngagementAgent = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Customer_Engagement_Agent",
-    modelName: openAIModel,
     systemMessage: """
     You are a helpful customer service agent
     here to provide fun for the customer based on the user's
@@ -52,9 +47,8 @@ var customerEngagementAgent = new OpenAIChatAgent(
     .RegisterPrintMessage();
 
 var summarizer = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "Summarizer",
-    modelName: openAIModel,
     systemMessage: """
     You are a helpful summarizer agent.
     Your job is to summarize the conversation between the user and the customer service agent.
@@ -64,9 +58,8 @@ var summarizer = new OpenAIChatAgent(
     .RegisterPrintMessage();
 
 var user = new OpenAIChatAgent(
-    openAIClient: openaiClient,
+    chatClient: chatClient,
     name: "User",
-    modelName: openAIModel,
     systemMessage: """
     Your name is John and you live in New York.
     You are reaching out to customer service to find out something fun.

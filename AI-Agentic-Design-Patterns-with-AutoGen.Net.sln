@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L3_Reflection_and_Blogpost_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L5_Coding_and_Math_Problem_Solving", "L5_Coding_and_Math_Problem_Solving\L5_Coding_and_Math_Problem_Solving.csproj", "{384112A5-6279-47B4-9984-BE38448B76B3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L6-Planning_and_Stock_Report_Generation", "L6-Planning_and_Stock_Report_Generation\L6-Planning_and_Stock_Report_Generation.csproj", "{3447AC81-B590-45C5-8E8C-D795DBCC6B05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L6_Planning_and_Stock_Report_Generation", "L6-Planning_and_Stock_Report_Generation\L6_Planning_and_Stock_Report_Generation.csproj", "{3447AC81-B590-45C5-8E8C-D795DBCC6B05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L4_Tool_Use_and_Conversational_Tic_Tac_Toe", "L4_Tool_Use_and_Conversational_Tic_Tac_Toe\L4_Tool_Use_and_Conversational_Tic_Tac_Toe.csproj", "{327EE0BD-8663-40A0-AEF7-9CF46C7093C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L4_Tool_Use_and_Conversational_Tic_Tac_Toe", "L4_Tool_Use_and_Conversational_Tic_Tac_Toe\L4_Tool_Use_and_Conversational_Tic_Tac_Toe.csproj", "{327EE0BD-8663-40A0-AEF7-9CF46C7093C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{EF1CD1F9-8815-4CE7-BF00-C90A46C9860B}"
 EndProject
