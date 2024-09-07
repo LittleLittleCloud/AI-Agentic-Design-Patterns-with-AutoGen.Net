@@ -5,7 +5,7 @@
 bin/
 obj/
 .DS_Store
-.idea/.idea.AI-Agentic-Design-Patterns-with-AutoGen.Net/.idea
+.idea/
+notebook/work/
+L6-Planning_and_Stock_Report_Generation/work/
 result.txt
-nvidia-blog.md
-L6-Planning_and_Stock_Report_Generation/work
