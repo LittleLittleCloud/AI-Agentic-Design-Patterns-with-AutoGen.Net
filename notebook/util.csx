@@ -1,7 +1,9 @@
 using Azure;
 using Azure.AI.OpenAI;
+using OpenAI;
+using OpenAI.Chat;
 
-public static class OpenAIClientProvider
+public static class ChatClientProvider
 {
     public static ChatClient Create(string openAIModel)
     {
