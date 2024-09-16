@@ -4,3 +4,10 @@
 # c#
 bin/
 obj/
+.DS_Store
+.idea/
+notebook/work/*
+!notebook/work/.gitkeep
+L6-Planning_and_Stock_Report_Generation/work/*
+!L6-Planning_and_Stock_Report_Generation/work/.gitkeep
+result.txt

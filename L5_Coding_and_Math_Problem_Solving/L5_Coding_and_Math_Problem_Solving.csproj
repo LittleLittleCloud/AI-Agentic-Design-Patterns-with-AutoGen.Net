@@ -13,4 +13,9 @@
 		<PackageReference Include="AutoGen.DotnetInteractive" Version="$(AutoGenVersion)" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Util\Util.csproj" />
+	</ItemGroup>
+
 </Project>

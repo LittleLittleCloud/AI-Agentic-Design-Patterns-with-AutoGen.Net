@@ -1,14 +1,11 @@
 ﻿using AutoGen.Core;
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
-using OpenAI;
+using Util;
 using OpenAI.Chat;
 using System.Runtime.CompilerServices;
 
-var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
-var openAIModel = "gpt-4o-mini";
-var openaiClient = new OpenAIClient(openAIKey);
-var chatClient = openaiClient.GetChatClient(openAIModel);
+var chatClient = ChatClientProvider.Create("gpt-4o-mini");
 
 // Define an OpenAI Chat Agent
 // You can also connect to other LLM platforms like Mistral, Gemini, Ollama by using a specific agent

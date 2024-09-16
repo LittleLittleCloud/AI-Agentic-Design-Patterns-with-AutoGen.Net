@@ -8,7 +8,11 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AutoGen" Version="$(AutoGenVersion)" />
+        <PackageReference Include="AutoGen" Version="$(AutoGenVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Util\Util.csproj" />
 	</ItemGroup>
 
 </Project>

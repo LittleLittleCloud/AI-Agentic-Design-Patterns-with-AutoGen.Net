@@ -2,15 +2,11 @@
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
 using Microsoft.SemanticKernel;
-using OpenAI;
 using System.ComponentModel;
 using System.Text;
+using Util;
 
-var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
-var openAIModel = "gpt-4o-mini";
-
-var openaiClient = new OpenAIClient(openAIKey);
-var chatClient = openaiClient.GetChatClient(openAIModel);
+var chatClient = ChatClientProvider.Create("gpt-4o-mini");
 
 // Initialize the chess board [3, 3]
 // 0: empty, 1: X, 2: O

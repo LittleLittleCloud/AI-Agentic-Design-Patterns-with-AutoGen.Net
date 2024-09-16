@@ -1,16 +1,11 @@
 ﻿using AutoGen.Core;
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
-using Azure.AI.OpenAI;
-using OpenAI;
+using Util;
 
-var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
-var openAIModel = "gpt-4o-mini";
+var chatClient = ChatClientProvider.Create("gpt-4o-mini");
 
-var openaiClient = new OpenAIClient(openAIKey);
-var chatClient = openaiClient.GetChatClient(openAIModel);
 // Create the needed agents
-
 var onboardingPersonalInformationAgent = new OpenAIChatAgent(
     chatClient: chatClient,
     name: "Onboarding_Personal_Information_Agent",

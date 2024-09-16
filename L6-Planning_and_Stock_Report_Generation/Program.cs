@@ -1,19 +1,15 @@
 ﻿using AutoGen.Core;
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
-using OpenAI;
 using System.Text;
+using Util;
 
 // Note
 // This example is slightly different with the python ones when it comes to engineer agent
 // due to the lacking built-in support of running python code in C# AutoGen.
 // The engineer and executor agent is replaced with market watcher and data analyst agents to gather and plot the stock price data.
 
-var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
-var openAIModel = "gpt-4o-mini";
-
-var openaiClient = new OpenAIClient(openAIKey);
-var chatClient = openaiClient.GetChatClient(openAIModel);
+var chatClient = ChatClientProvider.Create("gpt-4o-mini");
 
 // The Task!
 var task = """

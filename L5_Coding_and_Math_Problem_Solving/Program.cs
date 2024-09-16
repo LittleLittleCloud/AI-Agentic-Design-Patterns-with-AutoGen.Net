@@ -3,13 +3,9 @@ using AutoGen.DotnetInteractive;
 using AutoGen.DotnetInteractive.Extension;
 using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
-using OpenAI;
+using Util;
 
-var openAIKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("Please set the OPENAI_API_KEY environment variable.");
-var openAIModel = "gpt-4o-mini";
-
-var openaiClient = new OpenAIClient(openAIKey);
-var chatClient = openaiClient.GetChatClient(openAIModel);
+var chatClient = ChatClientProvider.Create("gpt-4o-mini");
 
 // Define a code executor to run dotnet code
 // Here we use the dotnet interactive as the code executor
